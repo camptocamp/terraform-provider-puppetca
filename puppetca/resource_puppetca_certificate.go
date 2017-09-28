@@ -31,7 +31,7 @@ func resourcePuppetCACertificate() *schema.Resource {
 func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{}) error {
 	name := d.Get("name").(string)
 	log.Printf("[INFO][puppetca] Creating Certificate: %s", name)
-	client := meta.(*puppetca.Client)
+	client := meta.(puppetca.Client)
 
 	cert, err := client.GetCertByName(name)
 	if err != nil {
@@ -45,7 +45,7 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[INFO] Refreshing Certificate: %s", d.Id())
 
-	client := meta.(*puppetca.Client)
+	client := meta.(puppetca.Client)
 	name := d.Get("name").(string)
 
 	cert, err := client.GetCertByName(name)
@@ -60,7 +60,7 @@ func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) e
 func resourcePuppetCACertificateDelete(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[INFO] Deleting Certificate: %s", d.Id())
 
-	client := meta.(*puppetca.Client)
+	client := meta.(puppetca.Client)
 	name := d.Get("name").(string)
 
 	err := client.DeleteCertByName(name)
