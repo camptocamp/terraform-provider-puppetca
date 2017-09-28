@@ -12,11 +12,11 @@ import (
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
-			"base_url": &schema.Schema{
+			"url": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_URL", ""),
-				Description: descriptions["base_url"],
+				Description: descriptions["url"],
 			},
 			"private_key": &schema.Schema{
 				Type:        schema.TypeString,
@@ -50,7 +50,7 @@ var descriptions map[string]string
 
 func init() {
 	descriptions = map[string]string{
-		"base_url": "The base URL to the Puppet CA",
+		"url": "The URL of the Puppet CA",
 
 		"private_key": "A Puppet private key to authenticate on the CA",
 
@@ -61,13 +61,13 @@ func init() {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	baseURL := d.Get("base_url").(string)
+	baseURL := d.Get("url").(string)
 	privateKey := d.Get("private_key").(string)
 	certificate := d.Get("certificate").(string)
 	caCert := d.Get("ca_cert").(string)
 
 	if baseURL == "" {
-		return nil, fmt.Errorf("No base_url provided")
+		return nil, fmt.Errorf("No url provided")
 	}
 
 	client, err := puppetca.NewClient(baseURL, privateKey, certificate, caCert)
