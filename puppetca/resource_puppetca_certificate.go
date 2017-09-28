@@ -15,10 +15,6 @@ func resourcePuppetCACertificate() *schema.Resource {
 		Delete: resourcePuppetCACertificateDelete,
 
 		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-			},
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -33,9 +29,9 @@ func resourcePuppetCACertificate() *schema.Resource {
 }
 
 func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{}) error {
-	log.Printf("[INFO][puppetca] Creating Certificate: %s", d.Id())
-	client := meta.(*puppetca.Client)
 	name := d.Get("name").(string)
+	log.Printf("[INFO][puppetca] Creating Certificate: %s", name)
+	client := meta.(*puppetca.Client)
 
 	cert, err := client.GetCertByName(name)
 	if err != nil {
