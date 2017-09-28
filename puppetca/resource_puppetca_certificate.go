@@ -3,8 +3,10 @@ package puppetca
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/camptocamp/go-puppetca/puppetca"
+	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
@@ -33,13 +35,34 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 	log.Printf("[INFO][puppetca] Creating Certificate: %s", name)
 	client := meta.(puppetca.Client)
 
-	cert, err := client.GetCertByName(name)
-	if err != nil {
-		return fmt.Errorf("Error retrieving certificate for %s: %v", name, err)
+	stateConf := &resource.StateChangeConf{
+		Pending:    []string{"found", "not found"},
+		Target:     []string{"found"},
+		Refresh:    findCert(client, name),
+		Timeout:    10 * time.Minute,
+		Delay:      1 * time.Second,
+		MinTimeout: 3 * time.Second,
 	}
+	cert, waitErr := stateConf.WaitForState()
+	if waitErr != nil {
+		return fmt.Errorf(
+			"Error waiting for certificate (%s) to be found: %s", name, waitErr)
+	}
+
 	d.SetId(name)
 	d.Set("cert", cert)
 	return resourcePuppetCACertificateRead(d, meta)
+}
+
+func findCert(client puppetca.Client, name string) resource.StateRefreshFunc {
+	return func() (interface{}, string, error) {
+		cert, err := client.GetCertByName(name)
+		if err != nil {
+			return nil, "not found", nil
+		}
+
+		return cert, "found", nil
+	}
 }
 
 func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) error {
