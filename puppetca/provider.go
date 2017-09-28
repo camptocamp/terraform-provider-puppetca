@@ -15,26 +15,26 @@ func Provider() terraform.ResourceProvider {
 			"url": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_URL", ""),
+				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_URL", "https://puppet:8140"),
 				Description: descriptions["url"],
 			},
-			"private_key": &schema.Schema{
+			"cert": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_PRIVATE_KEY", ""),
-				Description: descriptions["private_key"],
+				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_CERT", ""),
+				Description: descriptions["cert"],
 			},
-			"certificate": &schema.Schema{
+			"key": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_CERTIFICATE", ""),
-				Description: descriptions["certificate"],
+				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_KEY", ""),
+				Description: descriptions["key"],
 			},
-			"ca_cert": &schema.Schema{
+			"ca": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_CA_CERT", ""),
-				Description: descriptions["ca_cert"],
+				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_CA", ""),
+				Description: descriptions["ca"],
 			},
 		},
 
@@ -52,19 +52,19 @@ func init() {
 	descriptions = map[string]string{
 		"url": "The URL of the Puppet CA",
 
-		"private_key": "A Puppet private key to authenticate on the CA",
+		"cert": "A Puppet certificate to authenticate on the CA",
 
-		"certificate": "A Puppet certificate to authenticate on the CA",
+		"key": "A Puppet private key to authenticate on the CA",
 
-		"ca_cert": "The Puppet CA certificate",
+		"ca": "The Puppet CA certificate",
 	}
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	baseURL := d.Get("url").(string)
-	privateKey := d.Get("private_key").(string)
-	certificate := d.Get("certificate").(string)
-	caCert := d.Get("ca_cert").(string)
+	certificate := d.Get("cert").(string)
+	privateKey := d.Get("key").(string)
+	caCert := d.Get("ca").(string)
 
 	if baseURL == "" {
 		return nil, fmt.Errorf("No url provided")
