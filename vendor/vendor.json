@@ -205,6 +205,13 @@
 			"revisionTime": "2017-09-28T14:10:47Z"
 		},
 		{
+			"checksumSHA1": "/5cvgU+J4l7EhMXTK76KaCAfOuU=",
+			"origin": "github.com/hashicorp/terraform/vendor/github.com/davecgh/go-spew/spew",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
+			"revisionTime": "2017-08-08T15:38:46Z"
+		},
+		{
 			"checksumSHA1": "1K+xrZ1PBez190iGt5OnMtGdih4=",
 			"origin": "github.com/hashicorp/terraform/vendor/github.com/go-ini/ini",
 			"path": "github.com/go-ini/ini",
@@ -359,6 +366,13 @@
 			"revisionTime": "2017-08-08T15:38:46Z"
 		},
 		{
+			"checksumSHA1": "vt+P9D2yWDO3gdvdgCzwqunlhxU=",
+			"origin": "github.com/hashicorp/terraform/vendor/github.com/hashicorp/logutils",
+			"path": "github.com/hashicorp/logutils",
+			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
+			"revisionTime": "2017-08-08T15:38:46Z"
+		},
+		{
 			"checksumSHA1": "ui4/PIjSvNlwZfCKVzM0bE2VhBk=",
 			"path": "github.com/hashicorp/terraform/config",
 			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
@@ -383,6 +397,12 @@
 			"revisionTime": "2017-08-08T15:38:46Z"
 		},
 		{
+			"checksumSHA1": "uT6Q9RdSRAkDjyUgQlJ2XKJRab4=",
+			"path": "github.com/hashicorp/terraform/helper/config",
+			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
+			"revisionTime": "2017-08-08T15:38:46Z"
+		},
+		{
 			"checksumSHA1": "Vbo55GDzPgG/L/+W2pcvDhxrPZc=",
 			"path": "github.com/hashicorp/terraform/helper/experiment",
 			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
@@ -397,6 +417,18 @@
 		{
 			"checksumSHA1": "B267stWNQd0/pBTXHfI/tJsxzfc=",
 			"path": "github.com/hashicorp/terraform/helper/hilmapstructure",
+			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
+			"revisionTime": "2017-08-08T15:38:46Z"
+		},
+		{
+			"checksumSHA1": "2wJa9F3BGlbe2DNqH5lb5POayRI=",
+			"path": "github.com/hashicorp/terraform/helper/logging",
+			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
+			"revisionTime": "2017-08-08T15:38:46Z"
+		},
+		{
+			"checksumSHA1": "dhU2woQaSEI2OnbYLdkHxf7/nu8=",
+			"path": "github.com/hashicorp/terraform/helper/resource",
 			"revision": "8b3b678c2fd9d76b194b2f4dc3eb0d1883c95863",
 			"revisionTime": "2017-08-08T15:38:46Z"
 		},
