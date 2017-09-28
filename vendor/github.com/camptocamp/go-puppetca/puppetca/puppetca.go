@@ -90,7 +90,7 @@ func (c *Client) Do(method, path string) (string, error) {
 	if err != nil {
 		return "", errors.Wrapf(err, "failed to %s URL %s", method, fullPath)
 	}
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusNoContent {
 		return "", fmt.Errorf("failed to %s URL %s, got: %s", method, fullPath, resp.Status)
 	}
 	defer resp.Body.Close()
