@@ -36,12 +36,13 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 	client := meta.(puppetca.Client)
 
 	stateConf := &resource.StateChangeConf{
-		Pending:    []string{"found", "not found"},
-		Target:     []string{"found"},
-		Refresh:    findCert(client, name),
-		Timeout:    10 * time.Minute,
-		Delay:      1 * time.Second,
-		MinTimeout: 3 * time.Second,
+		Pending:        []string{"found", "not found"},
+		Target:         []string{"found"},
+		Refresh:        findCert(client, name),
+		Timeout:        10 * time.Minute,
+		Delay:          1 * time.Second,
+		MinTimeout:     3 * time.Second,
+		NotFoundChecks: 50,
 	}
 	cert, waitErr := stateConf.WaitForState()
 	if waitErr != nil {
