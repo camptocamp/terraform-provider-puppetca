@@ -1,3 +1,7 @@
+## 1.1.0 (Oct 17, 2018)
+
+- rebuild with new go-puppetca library (support for SSL parameters as strings)
+
 ## 1.0.1 (Oct 13, 2017)
 
 IMPROVEMENTS:
