@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 
 	"github.com/pkg/errors"
 )
@@ -17,20 +18,48 @@ type Client struct {
 	httpClient *http.Client
 }
 
+func isFile(str string) bool {
+	return strings.HasPrefix(str, "/")
+}
+
 // NewClient returns a new Client
-func NewClient(baseURL, keyFile, certFile, caFile string) (c Client, err error) {
+func NewClient(baseURL, keyStr, certStr, caStr string) (c Client, err error) {
 	// Load client cert
-	cert, err := tls.LoadX509KeyPair(certFile, keyFile)
-	if err != nil {
-		err = errors.Wrapf(err, "failed to load client cert at %s", certFile)
-		return
+	var cert tls.Certificate
+	if isFile(certStr) {
+		if !isFile(keyStr) {
+			err = fmt.Errorf("cert points to a file but key is a string")
+			return
+		}
+
+		cert, err = tls.LoadX509KeyPair(certStr, keyStr)
+		if err != nil {
+			err = errors.Wrapf(err, "failed to load client cert from file %s", certStr)
+			return c, err
+		}
+	} else {
+		if isFile(keyStr) {
+			err = fmt.Errorf("cert is a string but key points to a file")
+			return c, err
+		}
+
+		cert, err = tls.X509KeyPair([]byte(certStr), []byte(keyStr))
+		if err != nil {
+			err = errors.Wrapf(err, "failed to load client cert from string")
+			return c, err
+		}
 	}
 
 	// Load CA cert
-	caCert, err := ioutil.ReadFile(caFile)
-	if err != nil {
-		err = errors.Wrapf(err, "failed to load CA cert at %s", caFile)
-		return
+	var caCert []byte
+	if isFile(caStr) {
+		caCert, err = ioutil.ReadFile(caStr)
+		if err != nil {
+			err = errors.Wrapf(err, "failed to load CA cert at %s", caStr)
+			return
+		}
+	} else {
+		caCert = []byte(caStr)
 	}
 	caCertPool := x509.NewCertPool()
 	caCertPool.AppendCertsFromPEM(caCert)
