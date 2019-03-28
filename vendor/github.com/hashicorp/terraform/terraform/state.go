@@ -87,9 +87,6 @@ type State struct {
 	// Modules contains all the modules in a breadth-first order
 	Modules []*ModuleState `json:"modules"`
 
-	// Author of the state
-	Author string `json:"author"`
-
 	mu sync.Mutex
 }
 
