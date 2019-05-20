@@ -17,9 +17,6 @@ script:
 - make vendor-status
 - make vet
 
-branches:
-  only:
-  - master
 matrix:
   fast_finish: true
   allow_failures:
