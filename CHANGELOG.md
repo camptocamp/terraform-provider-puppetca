@@ -1,3 +1,8 @@
+## 1.2.0 (May 20, 2019)
+
+- Use Go modules
+- Use Terraform v0.12-beta's API
+
 ## 1.1.0 (Oct 17, 2018)
 
 - rebuild with new go-puppetca library (support for SSL parameters as strings)
