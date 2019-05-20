@@ -1,3 +1,7 @@
+## 1.2.1 (May 20, 2019)
+
+- Fix build config
+
 ## 1.2.0 (May 20, 2019)
 
 - Use Go modules
