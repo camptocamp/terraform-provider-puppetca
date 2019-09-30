@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/camptocamp/terraform-provider-puppetca/puppetca"
-	"github.com/hashicorp/terraform/plugin"
+	"github.com/hashicorp/terraform-plugin-sdk/plugin"
 )
 
 func main() {

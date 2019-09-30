@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/camptocamp/go-puppetca/puppetca"
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourcePuppetCACertificate() *schema.Resource {
