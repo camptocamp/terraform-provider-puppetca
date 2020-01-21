@@ -45,6 +45,28 @@ resource "puppetca_certificate" "test" {
 ```
 
 
+The provider needs to be configured with a certificate. This certificate
+should be signed by the CA, and have specific rights to list and delete
+certificates. See [the Puppet docs](https://puppet.com/docs/puppetserver/5.3/config_file_auth.html)
+for how to configure your Puppet Master to give these rights to your
+certificate. For example, if your certificate uses the `pp_employee` extension,
+you could add a rule like the following:
+
+```ruby
+{                                                                         
+    match-request: {
+        path: "^/puppet-ca/v1/certificate(_status|_request)?/([^/]+)$"
+        type: regex
+        method: [delete]
+    }
+    allow: [
+      {extensions:{pp_employee: "true"}},
+      ]
+    sort-order: 500
+    name: "let employees delete certs"
+},
+```
+
 
 Developing the Provider
 ---------------------------
