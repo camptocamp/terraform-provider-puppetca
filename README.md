@@ -1,6 +1,8 @@
 Puppet CA Terraform Provider
 =============================
 
+This Terraform provider allows to connect to a Puppet Certificate Authority to verify that node certificates were signed, and clean them upon decommissioning the node.
+
 
 Requirements
 ------------
@@ -11,23 +13,38 @@ Requirements
 Building The Provider
 ---------------------
 
-Clone repository to: `$GOPATH/src/github.com/hashicorp/terraform-provider-$PROVIDER_NAME`
+Clone repository to: `$GOPATH/src/github.com/camptocamp/terraform-provider-puppetca`
 
 ```sh
-$ mkdir -p $GOPATH/src/github.com/hashicorp; cd $GOPATH/src/github.com/hashicorp
-$ git clone git@github.com:hashicorp/terraform-provider-$PROVIDER_NAME
+$ mkdir -p $GOPATH/src/github.com/camptocamp; cd $GOPATH/src/github.com/camptocamp
+$ git clone git@github.com:camptocamp/terraform-provider-puppetca
 ```
 
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/hashicorp/terraform-provider-$PROVIDER_NAME
+$ cd $GOPATH/src/github.com/camptocamp/terraform-provider-puppetca
 $ make build
 ```
 
 Using the provider
 ----------------------
-## Fill in for each provider
+
+```hcl
+provider puppetca {
+  url = "https://puppetca.example.com:8140"
+  cert = "certs/puppet.crt"
+  key = "certs/puppet.key"
+  ca = "certs/ca.pem"
+
+}
+
+resource "puppetca_certificate" "test" {
+  name = "0a7842c26ad0.foo.com"
+}
+```
+
+
 
 Developing the Provider
 ---------------------------
@@ -39,7 +56,7 @@ To compile the provider, run `make build`. This will build the provider and put 
 ```sh
 $ make bin
 ...
-$ $GOPATH/bin/terraform-provider-$PROVIDER_NAME
+$ $GOPATH/bin/terraform-provider-puppetca
 ...
 ```
 
