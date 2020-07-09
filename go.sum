@@ -31,8 +31,6 @@ github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d/go.mod h1:6QX/PXZ
 github.com/bgentry/speakeasy v0.1.0 h1:ByYyxL9InA1OWqxJqqp2A5pYHUrCiAL6K3J+LKSsQkY=
 github.com/bgentry/speakeasy v0.1.0/go.mod h1:+zsyZBPWlz7T6j88CTgSN5bM796AkVf0kBD4zp0CCIs=
 github.com/bsm/go-vlq v0.0.0-20150828105119-ec6e8d4f5f4e/go.mod h1:N+BjUcTjSxc2mtRGSCPsat1kze3CUtvJN3/jTXlp29k=
-github.com/camptocamp/go-puppetca v0.0.0-20181017121406-ae8d0ccfb1c4 h1:Gh3Es3yhGKzlmtZLOijNh1jJwEnybI43atVHrIN2bX0=
-github.com/camptocamp/go-puppetca v0.0.0-20181017121406-ae8d0ccfb1c4/go.mod h1:VTQTVwAYHjSC6SmDG4QlWCji2HczXtPzDwB6rLZM00g=
 github.com/cheggaaa/pb v1.0.27/go.mod h1:pQciLPpbU0oxA0h+VJYYLxO+XeDQb5pZijXscXHm81s=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -73,8 +71,8 @@ github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+
 github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+vpHVxEJEs9eg=
 github.com/googleapis/gax-go/v2 v2.0.5 h1:sjZBwGj9Jlw33ImPtvFviGYvseOtDM7hkSKB7+Tv3SM=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
-github.com/greennosedmule/go-puppetca v0.0.0-20181017121406-ae8d0ccfb1c4 h1:UOGqLpZDcER63SuH69JfX+p+XwOs7mMW3soz2zporvA=
-github.com/greennosedmule/go-puppetca v0.0.0-20181017121406-ae8d0ccfb1c4/go.mod h1:j44aN3hqnOMK4QD7pFhSJgGUVWCISqa7i+8DosbH3XY=
+github.com/greennosedmule/go-puppetca v0.0.0-20200709161754-5700a3837dc8 h1:Nn12AbwkLjUpDSKMfcNdrmX3D+1sZSmiKGE/Wg6ODWM=
+github.com/greennosedmule/go-puppetca v0.0.0-20200709161754-5700a3837dc8/go.mod h1:j44aN3hqnOMK4QD7pFhSJgGUVWCISqa7i+8DosbH3XY=
 github.com/hashicorp/errwrap v0.0.0-20180715044906-d6c0cd880357/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
