@@ -23,7 +23,16 @@ func resourcePuppetCACertificate() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 			},
-			"cert": &schema.Schema{
+			"autosign": &schema.Schema{
+				Type:     schema.TypeBool,
+				Required: true,
+				ForceNew: false,
+			},
+			"fingerprint": &schema.Schema{
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+			"state": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,
 			},
@@ -45,14 +54,21 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 		MinTimeout:     3 * time.Second,
 		NotFoundChecks: 50,
 	}
-	cert, waitErr := stateConf.WaitForState()
+	waitResult, waitErr := stateConf.WaitForState()
 	if waitErr != nil {
 		return fmt.Errorf(
 			"Error waiting for certificate (%s) to be found: %s", name, waitErr)
 	}
 
+	jsonResult := waitResult.(string)
+	var result map[string]interface{}
+	json.Unmarshal([]byte(jsonResult), &result)
+
 	d.SetId(name)
-	d.Set("cert", cert)
+	d.Set("name", result["name"])
+	d.Set("fingerprint", result["fingerprint"])
+	d.Set("state", result["state"])
+
 	return resourcePuppetCACertificateRead(d, meta)
 }
 
@@ -77,11 +93,18 @@ func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) e
 	client := meta.(puppetca.Client)
 	name := d.Get("name").(string)
 
-	cert, err := client.GetCertByName(name)
+	jsonResult, err := client.GetCertByName(name)
 	if err != nil {
+		d.SetId("")
 		return fmt.Errorf("Error retrieving certificate for %s: %v", name, err)
 	}
-	d.Set("cert", cert)
+
+	var result map[string]interface{}
+	json.Unmarshal([]byte(jsonResult), &result)
+
+	d.Set("name", result["name"])
+	d.Set("fingerprint", result["fingerprint"])
+	d.Set("state", result["state"])
 
 	return nil
 }
