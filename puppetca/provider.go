@@ -36,6 +36,12 @@ func Provider() terraform.ResourceProvider {
 				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_CA", ""),
 				Description: descriptions["ca"],
 			},
+			"ignore_ssl": &schema.Schema{
+				Type:        schema.TypeBool,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_IGNORE_SSL", false),
+				Description: descriptions["ignore_ssl"],
+			},
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
@@ -65,12 +71,13 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	certificate := d.Get("cert").(string)
 	privateKey := d.Get("key").(string)
 	caCert := d.Get("ca").(string)
+	ignoreSsl := d.Get("ignore_ssl").(bool)
 
 	if baseURL == "" {
 		return nil, fmt.Errorf("No url provided")
 	}
 
-	client, err := puppetca.NewClient(baseURL, privateKey, certificate, caCert)
+	client, err := puppetca.NewClient(baseURL, privateKey, certificate, caCert, ignoreSsl)
 	if err != nil {
 		return nil, err
 	}
