@@ -3,7 +3,7 @@ package puppetca
 import (
 	"fmt"
 
-	"github.com/camptocamp/go-puppetca/puppetca"
+	"github.com/greennosedmule/go-puppetca/puppetca"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
