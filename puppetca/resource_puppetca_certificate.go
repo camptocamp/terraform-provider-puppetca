@@ -64,6 +64,14 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 	var result map[string]interface{}
 	json.Unmarshal([]byte(jsonResult), &result)
 
+	if (result["state"] == "requested") && d.Get("autosign").(bool) {
+		signErr := signCert(client, name)
+		if signErr != nil {
+			return fmt.Errorf(
+				"Error signing certificate (%s): %s", name, signErr)
+		}
+	}
+
 	d.SetId(name)
 	d.Set("name", result["name"])
 	d.Set("fingerprint", result["fingerprint"])
@@ -85,6 +93,11 @@ func findCert(client puppetca.Client, name string) resource.StateRefreshFunc {
 
 		return cert, "found", nil
 	}
+}
+
+func signCert(client puppetca.Client, name string) error {
+	err := client.SignCertByName(name)
+	return err
 }
 
 func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) error {
