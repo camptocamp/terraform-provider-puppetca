@@ -1,9 +1,11 @@
 package puppetca
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"time"
+	"strings"
 
 	"github.com/greennosedmule/go-puppetca/puppetca"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
