@@ -60,7 +60,11 @@ func findCert(client puppetca.Client, name string) resource.StateRefreshFunc {
 	return func() (interface{}, string, error) {
 		cert, err := client.GetCertByName(name)
 		if err != nil {
-			return nil, "not found", nil
+			log.Printf("[DEBUG][puppetca] Finding certificate: %s", err)
+			if strings.Contains(err.Error(), "404 Not Found") {
+				return nil, "not found", nil
+			}
+			return nil, "request error", err
 		}
 
 		return cert, "found", nil
