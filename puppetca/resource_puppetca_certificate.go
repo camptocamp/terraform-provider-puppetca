@@ -14,6 +14,7 @@ func resourcePuppetCACertificate() *schema.Resource {
 	return &schema.Resource{
 		Create: resourcePuppetCACertificateCreate,
 		Read:   resourcePuppetCACertificateRead,
+		Update: resourcePuppetCACertificateUpdate,
 		Delete: resourcePuppetCACertificateDelete,
 
 		Schema: map[string]*schema.Schema{
@@ -79,6 +80,10 @@ func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) e
 	d.Set("cert", cert)
 
 	return nil
+}
+
+func resourcePuppetCACertificateUpdate(d *schema.ResourceData, meta interface{}) error {
+	return resourcePuppetCACertificateRead(d, meta)
 }
 
 func resourcePuppetCACertificateDelete(d *schema.ResourceData, meta interface{}) error {
