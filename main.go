@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/camptocamp/terraform-provider-puppetca/puppetca"
+	"github.com/greennosedmule/terraform-provider-puppetca/puppetca"
 	"github.com/hashicorp/terraform-plugin-sdk/plugin"
 )
 

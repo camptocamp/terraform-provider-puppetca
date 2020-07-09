@@ -1,4 +1,4 @@
-module github.com/camptocamp/terraform-provider-puppetca
+module github.com/greennosedmule/terraform-provider-puppetca
 
 require (
 	github.com/camptocamp/go-puppetca v0.0.0-20181017121406-ae8d0ccfb1c4
