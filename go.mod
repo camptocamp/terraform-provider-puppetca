@@ -1,5 +1,7 @@
 module github.com/camptocamp/terraform-provider-puppetca
 
+go 1.14
+
 require (
 	github.com/camptocamp/go-puppetca v0.0.0-20181017121406-ae8d0ccfb1c4
 	github.com/hashicorp/hcl v1.0.0 // indirect
