@@ -1,6 +1,11 @@
 Puppet CA Terraform Provider
 =============================
 
+[![Terraform Registry Version](https://img.shields.io/badge/dynamic/json?color=blue&label=registry&query=%24.version&url=https%3A%2F%2Fregistry.terraform.io%2Fv1%2Fproviders%2Fcamptocamp%2Fpuppetca)](https://registry.terraform.io/providers/camptocamp/puppetca)
+[![Go Report Card](https://goreportcard.com/badge/github.com/camptocamp/terraform-provider-puppetca)](https://goreportcard.com/report/github.com/camptocamp/terraform-provider-puppetca)
+[![Build Status](https://travis-ci.org/camptocamp/terraform-provider-puppetca.svg?branch=master)](https://travis-ci.org/camptocamp/terraform-provider-puppetca)
+[![By Camptocamp](https://img.shields.io/badge/by-camptocamp-fb7047.svg)](http://www.camptocamp.com)
+
 This Terraform provider allows to connect to a Puppet Certificate Authority to verify that node certificates were signed, and clean them upon decommissioning the node.
 
 
