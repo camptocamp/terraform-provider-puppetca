@@ -4,39 +4,42 @@ import (
 	"fmt"
 
 	"github.com/greennosedmule/go-puppetca/puppetca"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
+type ProviderMeta struct {
+	client puppetca.Client
+}
+
 // Provider returns a terraform.ResourceProvider.
-func Provider() terraform.ResourceProvider {
+func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
-			"url": &schema.Schema{
+			"url": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_URL", "https://puppet:8140"),
 				Description: descriptions["url"],
 			},
-			"cert": &schema.Schema{
+			"cert": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_CERT", ""),
 				Description: descriptions["cert"],
 			},
-			"key": &schema.Schema{
+			"key": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_KEY", ""),
 				Description: descriptions["key"],
 			},
-			"ca": &schema.Schema{
+			"ca": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_CA", ""),
 				Description: descriptions["ca"],
 			},
-			"ignore_ssl": &schema.Schema{
+			"ignore_ssl": {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PUPPETCA_IGNORE_SSL", false),

@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"time"
 	"strings"
+	"time"
 
 	"github.com/greennosedmule/go-puppetca/puppetca"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourcePuppetCACertificate() *schema.Resource {
@@ -20,21 +20,21 @@ func resourcePuppetCACertificate() *schema.Resource {
 		Delete: resourcePuppetCACertificateDelete,
 
 		Schema: map[string]*schema.Schema{
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
-			"autosign": &schema.Schema{
+			"autosign": {
 				Type:     schema.TypeBool,
 				Required: true,
 				ForceNew: false,
 			},
-			"fingerprint": &schema.Schema{
+			"fingerprint": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"state": &schema.Schema{
+			"state": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
@@ -98,7 +98,7 @@ func findCert(client puppetca.Client, name string) resource.StateRefreshFunc {
 }
 
 func signCert(client puppetca.Client, name string) error {
-	err := client.SignCertByName(name)
+	err := client.SignRequest(name)
 	return err
 }
 

@@ -3,11 +3,12 @@ Puppet CA Terraform Provider
 
 This Terraform provider allows to connect to a Puppet Certificate Authority to verify that node certificates were signed, and clean them upon decommissioning the node.
 
+
 Requirements
 ------------
 
-- [Terraform](https://www.terraform.io/downloads.html) 0.10.x
-- [Go](https://golang.org/doc/install) 1.8 (to build the provider plugin)
+-	[Terraform](https://www.terraform.io/downloads.html) 0.10.x
+-	[Go](https://golang.org/doc/install) 1.8 (to build the provider plugin)
 
 Building The Provider
 ---------------------
@@ -17,7 +18,6 @@ Clone repository to: `$GOPATH/src/github.com/greennosedmule/terraform-provider-p
 ```sh
 $ mkdir -p $GOPATH/src/github.com/greennosedmule; cd $GOPATH/src/github.com/greennosedmule
 $ git clone git@github.com:greennosedmule/terraform-provider-puppetca
-...
 ```
 
 Enter the provider directory and build the provider
@@ -25,7 +25,6 @@ Enter the provider directory and build the provider
 ```sh
 $ cd $GOPATH/src/github.com/greennosedmule/terraform-provider-puppetca
 $ make build
-...
 ```
 
 Using the provider
@@ -33,18 +32,18 @@ Using the provider
 
 ```hcl
 provider puppetca {
-  url        = "https://puppetca.example.com:8140"
-  cert       = "certs/puppet.crt"
-  key        = "certs/puppet.key"
-  ca         = "certs/ca.pem"
-  ignore_ssl = true
+  url = "https://puppetca.example.com:8140"
+  cert = "certs/puppet.crt"
+  key = "certs/puppet.key"
+  ca = "certs/ca.pem"
+
 }
 
 resource "puppetca_certificate" "test" {
-  name     = "0a7842c26ad0.foo.com"
-  autosign = true
+  name = "0a7842c26ad0.foo.com"
 }
 ```
+
 
 The provider needs to be configured with a certificate. This certificate
 should be signed by the CA, and have specific rights to list and delete
@@ -54,7 +53,7 @@ certificate. For example, if your certificate uses the `pp_employee` extension,
 you could add a rule like the following:
 
 ```ruby
-{
+{                                                                         
     match-request: {
         path: "^/puppet-ca/v1/certificate(_status|_request)?/([^/]+)$"
         type: regex
@@ -67,6 +66,7 @@ you could add a rule like the following:
     name: "let employees delete certs"
 },
 ```
+
 
 Developing the Provider
 ---------------------------
@@ -86,7 +86,6 @@ In order to test the provider, you can simply run `make test`.
 
 ```sh
 $ make test
-...
 ```
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
@@ -95,5 +94,4 @@ In order to run the full suite of Acceptance tests, run `make testacc`.
 
 ```sh
 $ make testacc
-...
 ```
