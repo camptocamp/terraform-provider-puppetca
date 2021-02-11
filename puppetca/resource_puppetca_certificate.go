@@ -39,6 +39,10 @@ func resourcePuppetCACertificate() *schema.Resource {
 				Computed: true,
 			},
 		},
+
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 	}
 }
 
@@ -106,9 +110,9 @@ func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) e
 	log.Printf("[INFO] Refreshing Certificate: %s", d.Id())
 
 	client := meta.(puppetca.Client)
-	name := d.Get("name").(string)
+	name := d.Id()
 
-	jsonResult, err := client.GetCertByName(name)
+	jsonResult, err := client.GetCertStatusByName(name)
 	if err != nil {
 		d.SetId("")
 		return fmt.Errorf("Error retrieving certificate for %s: %v", name, err)

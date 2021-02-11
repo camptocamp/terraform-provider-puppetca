@@ -1,4 +1,12 @@
+# CHANGELOG
+
+## 2.0.3 (February 11, 2021)
+
+- Add puppetca_certificate resource import functionality
+- Use go-puppetca/GetCertStatusByName to populate certificate metadata properly in state
+
 ## 2.0.2 (February 10, 2021)
+
 - Update go-puppetca dependency
 - Update terraform-plugin-sdk to v2
 
