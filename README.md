@@ -3,12 +3,11 @@ Puppet CA Terraform Provider
 
 This Terraform provider allows to connect to a Puppet Certificate Authority to verify that node certificates were signed, and clean them upon decommissioning the node.
 
-
 Requirements
 ------------
 
--	[Terraform](https://www.terraform.io/downloads.html) 0.10.x
--	[Go](https://golang.org/doc/install) 1.8 (to build the provider plugin)
+- [Terraform](https://www.terraform.io/downloads.html) 0.14.x
+- [Go](https://golang.org/doc/install) 1.15 (to build the provider plugin)
 
 Building The Provider
 ---------------------
@@ -16,15 +15,15 @@ Building The Provider
 Clone repository to: `$GOPATH/src/github.com/greennosedmule/terraform-provider-puppetca`
 
 ```sh
-$ mkdir -p $GOPATH/src/github.com/greennosedmule; cd $GOPATH/src/github.com/greennosedmule
-$ git clone git@github.com:greennosedmule/terraform-provider-puppetca
+mkdir -p $GOPATH/src/github.com/greennosedmule; cd $GOPATH/src/github.com/greennosedmule
+git clone git@github.com:greennosedmule/terraform-provider-puppetca
 ```
 
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/greennosedmule/terraform-provider-puppetca
-$ make build
+cd $GOPATH/src/github.com/greennosedmule/terraform-provider-puppetca
+make build
 ```
 
 Using the provider
@@ -36,7 +35,6 @@ provider puppetca {
   cert = "certs/puppet.crt"
   key = "certs/puppet.key"
   ca = "certs/ca.pem"
-
 }
 
 resource "puppetca_certificate" "test" {
@@ -44,6 +42,13 @@ resource "puppetca_certificate" "test" {
 }
 ```
 
+or to configure the provider with environment variables:
+
+```sh
+export PUPPETCA_CA=$(cat certs/ca.pem)
+export PUPPETCA_CERT=$(cat certs/puppet.crt)
+export PUPPETCA_KEY=$(cat certs/puppet.key)
+```
 
 The provider needs to be configured with a certificate. This certificate
 should be signed by the CA, and have specific rights to list and delete
@@ -67,7 +72,6 @@ you could add a rule like the following:
 },
 ```
 
-
 Developing the Provider
 ---------------------------
 
@@ -85,7 +89,7 @@ $ $GOPATH/bin/terraform-provider-puppetca
 In order to test the provider, you can simply run `make test`.
 
 ```sh
-$ make test
+make test
 ```
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
@@ -93,5 +97,5 @@ In order to run the full suite of Acceptance tests, run `make testacc`.
 *Note:* Acceptance tests create real resources, and often cost money to run.
 
 ```sh
-$ make testacc
+make testacc
 ```

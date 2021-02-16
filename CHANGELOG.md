@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.4 (February 16, 2021)
+
+- Rebuild linux binary on RHEL 7 for better portability
+
 ## 2.0.3 (February 11, 2021)
 
 - Add puppetca_certificate resource import functionality
