@@ -88,7 +88,7 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 
 func findCert(client puppetca.Client, name string) resource.StateRefreshFunc {
 	return func() (interface{}, string, error) {
-		cert, err := client.GetCertByName(name)
+		cert, err := client.GetCertStatusByName(name)
 		if err != nil {
 			log.Printf("[DEBUG][puppetca] Finding certificate: %s", err)
 			if strings.Contains(err.Error(), "404 Not Found") {

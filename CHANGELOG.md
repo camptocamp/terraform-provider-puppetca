@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.5 (February 22, 2021)
+
+- Fix regression which causes certs not to be autosigned.
+
 ## 2.0.4 (February 16, 2021)
 
 - Rebuild linux binary on RHEL 7 for better portability
