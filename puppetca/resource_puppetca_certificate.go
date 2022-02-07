@@ -20,6 +20,9 @@ func resourcePuppetCACertificate() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: schema.ImportStatePassthrough,
 		},
+		// Necessary to allow terraform to know if the certificate needs to be
+		// updated or not when switching sign from false <=> true
+		Update: resourcePuppetCACertificateCreate,
 
 		Schema: map[string]*schema.Schema{
 			"name": &schema.Schema{
@@ -33,8 +36,12 @@ func resourcePuppetCACertificate() *schema.Resource {
 				Optional: true,
 			},
 			"sign": &schema.Schema{
-				Type:     schema.TypeBool,
-				ForceNew: true,
+				Type: schema.TypeBool,
+				// sign must be either ForceNew true or we need to implement
+				// Update for this resource which does not really mean something
+				// puppet wise. So instead we fall back to making sure the
+				// certificate is present by calling resourcePuppetCACertificateRead
+				ForceNew: false,
 				Optional: true,
 			},
 			"cert": &schema.Schema{
@@ -94,7 +101,7 @@ func signCert(client puppetca.Client, name, env string, sign bool) resource.Stat
 		cert, status, err := findCert(client, name, env)
 		if err != nil {
 			return cert, status, err
-		} else if sign == true {
+		} else if cert == "" && sign == true {
 			// do we have a CSR request to sign
 			csrReq, err := client.GetRequest(name, env)
 			if err != nil {
