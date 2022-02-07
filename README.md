@@ -49,6 +49,14 @@ resource "puppetca_certificate" "test" {
 }
 ```
 
+or to configure the provider with environment variables:
+
+```sh
+export PUPPETCA_URL="https://puppetca.example.com:8140"
+export PUPPETCA_CA=$(cat certs/ca.pem)
+export PUPPETCA_CERT=$(cat certs/puppet.crt)
+export PUPPETCA_KEY=$(cat certs/puppet.key)
+```
 
 The provider needs to be configured with a certificate. This certificate
 should be signed by the CA, and have specific rights to list and delete
