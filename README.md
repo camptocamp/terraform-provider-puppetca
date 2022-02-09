@@ -59,6 +59,15 @@ The second puppetca_certificate resrouce, ec2instance, will remove the certifica
 
 The usedby parameter can be populated with a resource parameter the drives the removal of the certificate from the Puppet CA at the desired time.  In the example above, if a Terraform plan has to recreate the EC2 instance, the certificate will be removed when the EC2 instance is destroyed since each EC2 instance is assigned a new instance id.
 
+The provider can also be configured using environment variables:
+
+```sh
+export PUPPETCA_URL="https://puppetca.example.com:8140"
+export PUPPETCA_CA=$(cat certs/ca.pem)
+export PUPPETCA_CERT=$(cat certs/puppet.crt)
+export PUPPETCA_KEY=$(cat certs/puppet.key)
+```
+
 The provider needs to be configured with a certificate. This certificate
 should be signed by the CA, and have specific rights to list and delete
 certificates. See [the Puppet docs](https://puppet.com/docs/puppetserver/5.3/config_file_auth.html)
