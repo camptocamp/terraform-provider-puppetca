@@ -15,6 +15,9 @@ func resourcePuppetCACertificate() *schema.Resource {
 		Create: resourcePuppetCACertificateCreate,
 		Read:   resourcePuppetCACertificateRead,
 		Delete: resourcePuppetCACertificateDelete,
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": &schema.Schema{
