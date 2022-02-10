@@ -70,10 +70,10 @@ func findCert(client puppetca.Client, name string) resource.StateRefreshFunc {
 }
 
 func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) error {
-	log.Printf("[INFO] Refreshing Certificate: %s", d.Id())
+	name := d.Id()
+	log.Printf("[INFO] Refreshing Certificate: %s", name)
 
 	client := meta.(puppetca.Client)
-	name := d.Get("name").(string)
 
 	cert, err := client.GetCertByName(name)
 	if err != nil {
