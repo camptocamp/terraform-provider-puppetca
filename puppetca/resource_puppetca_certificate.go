@@ -79,18 +79,23 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 	return resourcePuppetCACertificateRead(d, meta)
 }
 
+func isErrExpected404(err error) error {
+	if strings.Contains(err.Error(), http.StatusText(http.StatusNotFound)) {
+		return nil
+	}
+	return err
+}
+
 func findCert(client puppetca.Client, name, env string) (string, string, error) {
 	cert, err := client.GetCertByName(name, env)
 
 	if err != nil || cert == "" {
-		if strings.Contains(err.Error(), http.StatusText(http.StatusNotFound)) {
-			// Expected error: puppetserver returns a 404 when the certificate
-			// requested on a GET /puppet-ca/v1/certificate/ is not found. This
-			// is translated to an error in golang. We can set the error to nil
-			// in this case otherwise terraform will stop and report a bug in
-			// the provider which is not the case
-			return "", "not found", nil
-		}
+		// Expected error: puppetserver returns a 404 when the certificate
+		// requested on a GET /puppet-ca/v1/certificate/ is not found. This
+		// is translated to an error in golang. We can set the error to nil
+		// in this case otherwise terraform will stop and report a bug in
+		// the provider which is not the case
+		err = isErrExpected404(err)
 		return "", "not found", err
 	}
 	return cert, "found", nil
@@ -105,6 +110,10 @@ func signCert(client puppetca.Client, name, env string, sign bool) resource.Stat
 			// do we have a CSR request to sign
 			csrReq, err := client.GetRequest(name, env)
 			if err != nil {
+				// The bootstrap process of a host can take a bit of time, hence
+				// the request might not have reach puppet yet. If we bubble up
+				// the 404 to terraform it will stop.
+				err = isErrExpected404(err)
 				return nil, "not found", err
 			}
 			if csrReq != "" {
