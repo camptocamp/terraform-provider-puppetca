@@ -79,6 +79,7 @@ func resourcePuppetCACertificateRead(d *schema.ResourceData, meta interface{}) e
 	if err != nil {
 		return fmt.Errorf("Error retrieving certificate for %s: %v", name, err)
 	}
+	d.Set("name", name)
 	d.Set("cert", cert)
 
 	return nil
