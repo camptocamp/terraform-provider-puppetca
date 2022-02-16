@@ -34,6 +34,7 @@ func resourcePuppetCACertificate() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 				ForceNew: true,
+			},
 			"env": &schema.Schema{
 				Type:     schema.TypeString,
 				ForceNew: false,
