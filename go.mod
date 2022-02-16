@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go v1.37.0 // indirect
 	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
-	github.com/camptocamp/go-puppetca v0.0.0-20200918132719-43b6b595ceee // indirect
+	github.com/camptocamp/go-puppetca v0.0.0-20220207140217-c3faf5528998
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
@@ -40,7 +40,7 @@ require (
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20191212124732-c6ae6269b9d7 // indirect
 	github.com/hashicorp/terraform-exec v0.13.3 // indirect
 	github.com/hashicorp/terraform-json v0.10.0 // indirect
-	github.com/hashicorp/terraform-plugin-sdk v1.17.2 // indirect
+	github.com/hashicorp/terraform-plugin-sdk v1.17.2
 	github.com/hashicorp/terraform-plugin-test/v2 v2.2.1 // indirect
 	github.com/hashicorp/terraform-svchost v0.0.0-20200729002733-f050f53b9734 // indirect
 	github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d // indirect
