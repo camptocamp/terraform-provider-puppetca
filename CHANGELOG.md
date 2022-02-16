@@ -1,3 +1,10 @@
+## 1.4.0 (Feb 16, 2022)
+
+- Issue 4: Resource Dependency for puppetca
+- feat: remove vendoring
+- feat: add passthrough importer
+- feat: add signing
+
 ## 1.3.0 (July 24, 2020)
 
 - Use new Terraform plugin SDK
