@@ -55,7 +55,7 @@ resource "puppetca_certificate" "ec2instance" {
 ```
 
 The first `puppetca_certificate` resource, `test`, will remove the certificate if a destroy plan is run.
-The second puppetca_certificate resrouce, ec2instance, will remove the certificate if Terraform destroys the EC2 instance.
+The second `puppetca_certificate` resource, `ec2instance`, will remove the certificate if Terraform destroys the EC2 instance.
 
 The usedby parameter can be populated with a resource parameter the drives the removal of the certificate from the Puppet CA at the desired time.  In the example above, if a Terraform plan has to recreate the EC2 instance, the certificate will be removed when the EC2 instance is destroyed since each EC2 instance is assigned a new instance id.
 
