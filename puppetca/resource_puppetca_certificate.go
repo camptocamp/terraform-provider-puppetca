@@ -30,6 +30,11 @@ func resourcePuppetCACertificate() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 			},
+			"usedby": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
 			"env": &schema.Schema{
 				Type:     schema.TypeString,
 				ForceNew: false,
@@ -54,6 +59,7 @@ func resourcePuppetCACertificate() *schema.Resource {
 
 func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{}) error {
 	name := d.Get("name").(string)
+	usedby := d.Get("usedby").(string)
 	env := d.Get("env").(string)
 	sign := d.Get("sign").(bool)
 	log.Printf("[INFO][puppetca] Creating Certificate: %s", name)
@@ -75,6 +81,7 @@ func resourcePuppetCACertificateCreate(d *schema.ResourceData, meta interface{})
 	}
 
 	d.SetId(name)
+	d.Set("usedby", usedby)
 	d.Set("cert", cert)
 	return resourcePuppetCACertificateRead(d, meta)
 }
